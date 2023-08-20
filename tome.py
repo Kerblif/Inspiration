@@ -1,4 +1,5 @@
 from typing import Union, Any
+import os
 
 class Tome:
     id: str
@@ -12,6 +13,7 @@ class Tome:
     unique: bool
     audio: Union[str, None]
     manifestationtype: Union[str, None]
+    imagePath: Union[str, None]
 
     def __init__(self, init_data):
         for key in init_data:
@@ -46,6 +48,9 @@ class Tome:
                     self.manifestationtype = val
                 case _:
                     print("Strange key:", key)
+        
+        path = f'./data/images/books/{self.id}.png'
+        self.imagePath = path if os.path.exists(path) else None
 
     def __str__(self):
         return f'ID: {self.id}\nLabel: {self.label}'
